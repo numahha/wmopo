@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+data1 = np.loadtxt('curve100.csv',delimiter=',')
+data1s = np.loadtxt('curve100s.csv',delimiter=',')
+data2 = np.loadtxt('curve099.csv',delimiter=',')
+data2s = np.loadtxt('curve099s.csv',delimiter=',')
+data3 = np.loadtxt('curve090.csv',delimiter=',')
+data3s = np.loadtxt('curve090s.csv',delimiter=',')
+#plt.plot(np.sum(data1, axis=1))
+#plt.plot(np.sum(data2, axis=1))
+#plt.plot(np.mean(data3, axis=1))
+plt.errorbar(np.arange(data1.shape[0]), -np.mean(data1, axis=1),  yerr=np.std(data1, axis=1), color ="black",linestyle = "solid",label=r"Algorithm 1 ($\alpha=1.0$)")
+plt.errorbar(np.arange(data2.shape[0]), -np.mean(data2, axis=1),  yerr=np.std(data2, axis=1), color ="red",linestyle = "solid",label=r"Algorithm 1 ($\alpha=0.99$)")
+plt.errorbar(np.arange(data3.shape[0]), -np.mean(data3, axis=1),  yerr=np.std(data3, axis=1), color ="blue",linestyle = "solid",label=r"Algorithm 1 ($\alpha=0.9$)")
+plt.errorbar(np.arange(data1s.shape[0]), -np.mean(data1s, axis=1), yerr=np.std(data1s, axis=1),color ="black",linestyle = "dashed",label=r"Algorithm 2 ($\alpha=1.0$)")
+plt.errorbar(np.arange(data2s.shape[0]), -np.mean(data2s, axis=1), yerr=np.std(data2s, axis=1),color ="red",linestyle = "dashed",label=r"Algorithm 2 ($\alpha=0.99$)")
+plt.errorbar(np.arange(data3s.shape[0]), -np.mean(data3s, axis=1), yerr=np.std(data3s, axis=1),color ="blue",linestyle = "dashed",label=r"Algorithm 2 ($\alpha=0.9$)")
+plt.legend(loc='upper right')
+plt.xlabel('Iteration', fontsize=18)
+plt.ylabel('Estimated weighted loss', fontsize=18)
+plt.ylim([ -8,14])
+plt.savefig("curve.pdf")
+plt.show()
+
